@@ -4,17 +4,11 @@ Antigate (Decode captcha service - antigate.com) wrapper
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'antigate_api'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
     $ gem install antigate_api
+
+## Requirement
+
+    /Users/tamvo/code/tools/yuicompressor-2.4.8pre.jar
 
 ## Usage
 
