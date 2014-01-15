@@ -6,15 +6,18 @@ require "active_support"
 module WebOptimizer
   extend WebOptimizer::Common
   def self.compress_css(dir_path, ignore_paths=[])
-    compress_css_recursive(dir_path, ignore_paths, true)
+    self.compress_css_recursive(dir_path, ignore_paths, true)
   end
 
   def self.compress_css_recursive(dir_path, ignore_paths, trict=false)
     return unless File.directory? dir_path
 
-    ignore_paths = ignore_paths.map { |path| File.join(dir_path, path) }
+    ignore_paths = ignore_paths.map do |path|
+      tmp_path = Pathname.new(path)
+      tmp_path.absolute? ? path : File.join(dir_path, path)
+    end
     unless check_include_dir(ignore_paths, dir_path)
-      Dir[File.join(dir_path, "**/*")].each do |css_path|
+      Dir[File.join(dir_path, "**/*.css")].each do |css_path|
         if File.directory?(css_path)
           compress_css_recursive(css_path, trict)
         elsif !css_path.end_with?("pack.css") && !css_path.end_with?("min.css") &&

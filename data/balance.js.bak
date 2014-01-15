@@ -1,0 +1,64 @@
+jQuery(function() {
+  var $ = jQuery.noConflict();
+
+  Balance = {}
+  Balance.setupListener = function() {
+    var $tablePackageOrder = $("#table-payment-twitter-package-container");
+    $tablePackageOrder.find(".icon_detail").live("click", function() {
+      var $row = $(this).closest("tr");
+      if ($row.hasClass("expanded")) {
+        $row.removeClass("expanded");
+        $tablePackageOrder.find("tr[parent_package_order_id=" + $row.attr("package_order_id") + "]").fadeOut();
+      } else {
+        $row.addClass("expanded");
+        $tablePackageOrder.find("tr[parent_package_order_id=" + $row.attr("package_order_id") + "]").fadeIn();
+      }
+    });
+  }
+
+  Balance.setupPagingNavigator = function() {
+    var $pagingContainer = $(".paging_container");
+    $pagingContainer.find("a.selected, a.disabled").live("click", function() {
+      return false;
+    });
+
+    $pagingContainer.find("a.previous_page.click, a.next_page.click, a.page_num.click").live("click", function() {
+      var page = $(this).attr("page_num");
+      var $tableOrder = $("#table-payment-history-container");
+      $tableOrder.mask("Loading...");
+      var $pagingMetadata = $("#paging-metadata .page_info[page=" + page + "]");
+      $.ajax({
+        url: "",
+        type: "POST",
+        dataType: "JSON",
+        data: {
+          action: "load_payment_usage_history_table",
+          page: page,
+          payment_next: $pagingMetadata.attr("payment_next"),
+          cp_log_next: $pagingMetadata.attr("cp_log_next")
+        },
+        success: function(response) {
+          $tableOrder.html(response.html);
+          $tableOrder.scrollToElement(500);
+        },
+        error: function() {
+          alert("Exception");
+        },
+        complete: function() {
+          $tableOrder.unmask();
+        }
+      });
+      return false;
+    });
+  }
+
+  Balance.init = function() {
+    Balance.setupListener();
+    Balance.setupPagingNavigator();
+
+    $("#table-payment-twitter-package-container td.plan_name > span").tipsy({html: true});
+  }
+
+  Balance.init();
+});
+
