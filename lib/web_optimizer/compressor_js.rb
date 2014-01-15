@@ -1,4 +1,3 @@
-require "debugger"
 require "fileutils"
 require "active_support"
 

@@ -3,4 +3,5 @@ require "debugger"
 
 dir = "/Users/tamvo/code/lib/ruby/web_optimizer/data"; WebOptimizer.compress_css(dir)
 dir = "/Users/tamvo/code/lib/ruby/web_optimizer/data"; WebOptimizer.compress_js(dir)
+dir = "/Users/tamvo/code/lib/ruby/web_optimizer/data"; WebOptimizer.compress_img(dir)
 

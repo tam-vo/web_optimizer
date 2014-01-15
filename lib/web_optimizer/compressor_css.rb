@@ -1,4 +1,3 @@
-require "debugger"
 require "fileutils"
 require "active_support"
 # require "#{File.expand_path File.dirname(__FILE__)}/common.rb"

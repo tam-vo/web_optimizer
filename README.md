@@ -10,6 +10,10 @@ Antigate (Decode captcha service - antigate.com) wrapper
 
     /Users/tamvo/code/tools/yuicompressor-2.4.8pre.jar
     /Users/tamvo/code/tools/compiler-latest/compiler.jar
+    gem install pngquant
+    (/usr/local/bin/pngquant)
+    gem install image_optim
+    (/Users/tamvo/.rvm/gems/ruby-1.9.3-p194@general/bin/image_optim)
 
 ## Usage
 
