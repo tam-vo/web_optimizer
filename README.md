@@ -1,10 +1,12 @@
 # AntigateApi
 
-Antigate (Decode captcha service - antigate.com) wrapper
+Some util script to optime your assets (images, js files, css files).
+Contribute more are welcome, please drop me an email at
+vo.mita.ov at gmail.com if you need help or want to contribute
 
 ## Installation
 
-    $ gem install antigate_api
+    $ gem install web_optimizer
 
 ## Requirement
 
@@ -19,8 +21,9 @@ Antigate (Decode captcha service - antigate.com) wrapper
 
 Compress CSS
 ```
-WebOptimizer.compress_css(dir, ignore_paths)
-WebOptimizer.compress_js(dir, ignore_paths)
+WebOptimizer.compress_css(dir, ignore_paths=[])
+WebOptimizer.compress_js(dir, ignore_paths=[])
+WebOptimizer.compress_img(dir, ignore_paths=[])
 ```
 
 ## Contributing
@@ -30,3 +33,4 @@ WebOptimizer.compress_js(dir, ignore_paths)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+

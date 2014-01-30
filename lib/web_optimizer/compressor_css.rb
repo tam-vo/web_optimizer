@@ -9,7 +9,7 @@ module WebOptimizer
   end
 
   def self.compress_css_recursive(dir_path, ignore_paths, trict=false)
-    return unless File.directory? dir_path
+    raise Exception.new("Invalid dir path") unless File.directory? dir
 
     ignore_paths = ignore_paths.map do |path|
       tmp_path = Pathname.new(path)
