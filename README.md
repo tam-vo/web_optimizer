@@ -1,4 +1,4 @@
-# AntigateApi
+# Web Optimizer
 
 Some util script to optime your assets (images, js files, css files).
 Contribute more are welcome, please drop me an email at
@@ -19,11 +19,18 @@ vo.mita.ov at gmail.com if you need help or want to contribute
 
 ## Usage
 
-Compress CSS
+Compress Stuffs
 ```
 WebOptimizer.compress_css(dir, ignore_paths=[])
 WebOptimizer.compress_js(dir, ignore_paths=[])
 WebOptimizer.compress_img(dir, ignore_paths=[])
+```
+
+Translation Yaml files
+```
+require "web_stuff"
+dir_path = "/Users/tamvo/code/rails/minesweeper/config/locales"
+WebStuff::YamlTranslations.translations_locale_dir(dir_path, "en", "it")
 ```
 
 ## Contributing
