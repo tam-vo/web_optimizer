@@ -33,6 +33,12 @@ dir_path = "/Users/tamvo/code/rails/minesweeper/config/locales"
 WebStuff::YamlTranslations.translations_locale_dir(dir_path, "en", "it")
 ```
 
+Convert Less to Scss
+```
+require "web_stuff"
+WebStuff::LessToScss.convert("less_path")
+```
+
 ## Contributing
 
 1. Fork it
