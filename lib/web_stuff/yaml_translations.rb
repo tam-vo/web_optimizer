@@ -5,9 +5,10 @@ module WebStuff
   extend Common::GoogleTranslator
 
   module YamlTranslations
+    @@content = ""
+
     def self.translations_locale_dir(dir_path, from_locale, to_locale)
       raise Exception.new("Invalid dir path") unless File.directory? dir_path
-      puts "translations_locale_dir"
 
       Dir[File.join(dir_path, "**/*.#{from_locale}.yml"), File.join(dir_path, "**/#{from_locale}.yml")].each do |locale_path|
         if File.basename(locale_path) == "#{from_locale}.yml"
@@ -47,22 +48,22 @@ module WebStuff
     end
 
     def self.output_hash(from_hash, to_hash, from_locale, to_locale)
-      content = ""
-      output_hash_recursive(content, from_hash, to_hash, from_locale, to_locale, 0)
+      @@content = ""
+      output_hash_recursive(from_hash, to_hash, from_locale, to_locale, 0)
     end
 
-    def self.output_hash_recursive(content, from_hash, to_hash, from_locale, to_locale, level)
+    def self.output_hash_recursive(from_hash, to_hash, from_locale, to_locale, level)
       to_hash.each do |key, value|
         if value.is_a?(Hash)
-          content += "  "*level + "#{key}:\n"
+          @@content += "  "*level + "#{key}:\n"
           key = from_locale if key == to_locale
-          return self.output_hash_recursive(content, from_hash[key], value, from_locale, to_locale, level+1)
+          self.output_hash_recursive(from_hash[key], value, from_locale, to_locale, level+1)
         elsif value.is_a?(String)
-          content += "  "*level + "# #{from_hash[key]}\n"
-          content += "  "*level + "#{key}: #{value}\n"
+          @@content += "  "*level + "# #{from_hash[key]}\n"
+          @@content += "  "*level + "#{key}: #{value}\n"
         end
       end
-      content
+      @@content
     end
   end
 end
