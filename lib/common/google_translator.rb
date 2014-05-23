@@ -28,15 +28,15 @@ module Common
       json[0][0]
     end
 
-    def self.standarize_translation(translation)
+    def self.standarize_translation(original, translation)
       translation = translation.gsub(/\n/, "").gsub(/% s/, "%s").gsub(/  /, " ").
         gsub(/< ?(\/?) (\w+) >/, '<\1\2>').gsub(/ ([\.,!?])( |$)/, '\1')
 
       translation_data = translation.scan(/{ ?{.*?} ?}/)
-      value_data = value.scan(/{{.*?}}/)
+      original_data = original.scan(/{{.*?}}/)
       if translation_data.present?
         translation_data.each_with_index do |trans, index|
-          translation = translation.gsub(trans, value_data[index])
+          translation = translation.gsub(trans, original_data[index])
         end
       end
       translation
