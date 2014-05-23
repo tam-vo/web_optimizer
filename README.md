@@ -19,21 +19,38 @@ vo.mita.ov at gmail.com if you need help or want to contribute
 
 ## Usage
 
-Compress Stuffs
+
+**Compress Stuffs**
 ```
 WebOptimizer.compress_css(dir, ignore_paths=[])
 WebOptimizer.compress_js(dir, ignore_paths=[])
 WebOptimizer.compress_img(dir, ignore_paths=[])
 ```
 
-Translation Yaml files
+**Translation Yaml files**
 ```
 require "web_stuff"
 dir_path = "/Users/tamvo/code/rails/minesweeper/config/locales"
 WebStuff::YamlTranslations.translations_locale_dir(dir_path, "en", "it")
 ```
 
-Convert Less to Scss
+**Translation Angular Locale files**
+
+- Sample `en.js.coffee` file:
+
+```
+@Locale ||= {}
+@Locale.EN_LOCALES = {
+  banner_bitcoin: "Bitcoin"
+}
+```
+
+```
+require "web_stuff"
+WebStuff::AngularLocaleTranslations.translations_locale_dir(dir_path, "en", "ja")
+```
+
+**Convert Less to Scss**
 ```
 require "web_stuff"
 WebStuff::LessToScss.convert("less_path")
