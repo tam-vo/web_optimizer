@@ -33,17 +33,7 @@ module WebStuff
           self.traverse_hash(value, from_locale, to_locale)
         elsif value.is_a?(String)
           translation = Common::GoogleTranslator.translate(value, from_locale, to_locale)
-          translation = translation.gsub(/\n/, "").gsub(/% s/, "%s").gsub(/  /, " ").
-            gsub(/< ?(\/?) (\w+) >/, '<\1\2>').gsub(/ ([\.,!?])( |$)/, '\1')
-
-          translation_data = translation.scan(/{ ?{.*?} ?}/)
-          value_data = value.scan(/{{.*?}}/)
-          if translation_data.present?
-            translation_data.each_with_index do |trans, index|
-              translation = translation.gsub(trans, value_data[index])
-            end
-          end
-          hash[key] = translation
+          hash[key] = Common::GoogleTranslator.standarize_translation(translation)
         end
       end
     end

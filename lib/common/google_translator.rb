@@ -27,6 +27,20 @@ module Common
       json = JSON(result.body.match(/^\[(\[\[.*?\]\])/)[1])
       json[0][0]
     end
+
+    def self.standarize_translation(translation)
+      translation = translation.gsub(/\n/, "").gsub(/% s/, "%s").gsub(/  /, " ").
+        gsub(/< ?(\/?) (\w+) >/, '<\1\2>').gsub(/ ([\.,!?])( |$)/, '\1')
+
+      translation_data = translation.scan(/{ ?{.*?} ?}/)
+      value_data = value.scan(/{{.*?}}/)
+      if translation_data.present?
+        translation_data.each_with_index do |trans, index|
+          translation = translation.gsub(trans, value_data[index])
+        end
+      end
+      translation
+    end
   end
 end
 
